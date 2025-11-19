@@ -374,8 +374,8 @@ class MemoryApp {
         document.getElementById('streakDays').textContent = this.progress.stats.streak;
         
         // Update quick action cards
-        document.getElementById('dueCards').textContent = `${dueWords.length} كلمة للمراجعة`;
-        document.getElementById('newWordsCount').textContent = `${newWords.length} كلمة جديدة`;
+        document.getElementById('dueCards').textContent = `${dueWords.length} palabras para revisar`;
+        document.getElementById('newWordsCount').textContent = `${newWords.length} palabras nuevas`;
         
         // Update progress overview
         document.getElementById('statsNew').textContent = allWords.filter(w => w.level === 0).length;
@@ -420,13 +420,13 @@ class MemoryApp {
                         <h3>${displayName}</h3>
                         <div class="category-icon">${icon}</div>
                     </div>
-                    <p class="category-count">${progress.total} كلمة</p>
+                    <p class="category-count">${progress.total} palabras</p>
                     <div class="category-progress-bar">
                         <div class="category-progress-fill" style="width: ${progress.percentage}%"></div>
                     </div>
                     <div class="category-stats">
-                        <span>متقنة: ${progress.mastered}</span>
-                        <span>قيد التعلم: ${progress.learning}</span>
+                        <span>Dominadas: ${progress.mastered}</span>
+                        <span>Aprendiendo: ${progress.learning}</span>
                     </div>
                 `;
                 
@@ -450,7 +450,7 @@ class MemoryApp {
         this.sessionCards = [...dueWords, ...newWords].slice(0, 20);
         
         if (this.sessionCards.length === 0) {
-            alert('لا توجد كلمات جديدة في هذه الفئة!');
+            alert('¡No hay palabras nuevas en esta categoría!');
             return;
         }
         
@@ -466,7 +466,7 @@ class MemoryApp {
         const dueWords = this.getDueWords();
         
         if (dueWords.length === 0) {
-            alert('رائع! لا توجد كلمات للمراجعة اليوم. جرب تعلم كلمات جديدة!');
+            alert('¡Genial! No hay palabras para revisar hoy. ¡Intenta aprender palabras nuevas!');
             return;
         }
         
@@ -480,7 +480,7 @@ class MemoryApp {
         const newWords = this.getNewWords(15);
         
         if (newWords.length === 0) {
-            alert('مبروك! لقد بدأت بتعلم جميع الكلمات. راجع الكلمات السابقة!');
+            alert('¡Felicidades! Has comenzado a aprender todas las palabras. ¡Revisa las palabras anteriores!');
             return;
         }
         
@@ -492,7 +492,7 @@ class MemoryApp {
     
     startStudyMode(mode) {
         if (this.sessionCards.length === 0) {
-            alert('الرجاء اختيار فئة أو بدء جلسة مراجعة أولاً');
+            alert('Por favor, selecciona una categoría o inicia una sesión de revisión primero');
             return;
         }
         
@@ -650,8 +650,8 @@ class MemoryApp {
         feedback.classList.remove('hidden', 'correct', 'incorrect');
         feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
         feedback.querySelector('.feedback-content').textContent = isCorrect 
-            ? '✅ إجابة صحيحة! ممتاز!' 
-            : `❌ خطأ. الإجابة الصحيحة: ${correct}`;
+            ? '✅ ¡Respuesta correcta! ¡Excelente!' 
+            : `❌ Incorrecto. La respuesta correcta es: ${correct}`;
         
         // Update progress
         this.updateWordProgress(card.word, isCorrect ? 4 : 1);
@@ -708,8 +708,8 @@ class MemoryApp {
         feedback.classList.remove('hidden', 'correct', 'incorrect');
         feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
         feedback.querySelector('.feedback-content').textContent = isCorrect 
-            ? '✅ إجابة صحيحة! ممتاز!' 
-            : `❌ خطأ. الإجابة الصحيحة: ${card.word}`;
+            ? '✅ ¡Respuesta correcta! ¡Excelente!' 
+            : `❌ Incorrecto. La respuesta correcta es: ${card.word}`;
         
         // Update progress
         this.updateWordProgress(card.word, isCorrect ? 4 : 1);
@@ -777,7 +777,7 @@ class MemoryApp {
             
             window.speechSynthesis.speak(utterance);
         } else {
-            alert('المتصفح لا يدعم النطق الصوتي. جرب متصفح Chrome أو Edge.');
+            alert('El navegador no soporta pronunciación de voz. Prueba con Chrome o Edge.');
         }
     }
     
@@ -799,8 +799,8 @@ class MemoryApp {
         feedback.classList.remove('hidden', 'correct', 'incorrect');
         feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
         feedback.querySelector('.feedback-content').textContent = isCorrect 
-            ? '✅ إجابة صحيحة! ممتاز!' 
-            : '❌ خطأ. استمع مرة أخرى:';
+            ? '✅ ¡Respuesta correcta! ¡Excelente!' 
+            : '❌ Incorrecto. Escucha de nuevo:';
         
         // Show correct word
         document.getElementById('listeningCorrectWord').textContent = card.word;
@@ -951,9 +951,9 @@ class MemoryApp {
                     <div class="category-progress-fill" style="width: ${progress.percentage}%"></div>
                 </div>
                 <div class="category-stats">
-                    <span>جديدة: ${progress.newWords}</span>
-                    <span>قيد التعلم: ${progress.learning}</span>
-                    <span>متقنة: ${progress.mastered}</span>
+                    <span>Nuevas: ${progress.newWords}</span>
+                    <span>Aprendiendo: ${progress.learning}</span>
+                    <span>Dominadas: ${progress.mastered}</span>
                 </div>
             `;
             
@@ -966,7 +966,7 @@ class MemoryApp {
         if (!container) return;
         
         if (this.progress.activities.length === 0) {
-            container.innerHTML = '<p class="no-activity">لم تبدأ الدراسة بعد. ابدأ الآن!</p>';
+            container.innerHTML = '<p class="no-activity">Aún no has comenzado a estudiar. ¡Empieza ahora!</p>';
             return;
         }
         
@@ -980,10 +980,10 @@ class MemoryApp {
             let description = '';
             
             if (activity.type === 'study_session') {
-                const mode = activity.details.mode === 'flashcard' ? 'بطاقات تعليمية' :
-                            activity.details.mode === 'quiz' ? 'اختبار' :
-                            activity.details.mode === 'typing' ? 'كتابة' : 'استماع';
-                description = `درست ${activity.details.words} كلمة باستخدام ${mode}`;
+                const mode = activity.details.mode === 'flashcard' ? 'Tarjetas de Memoria' :
+                            activity.details.mode === 'quiz' ? 'Quiz' :
+                            activity.details.mode === 'typing' ? 'Escritura' : 'Escucha';
+                description = `Estudiaste ${activity.details.words} palabras usando ${mode}`;
             }
             
             item.innerHTML = `
@@ -998,10 +998,10 @@ class MemoryApp {
     getTimeAgo(timestamp) {
         const seconds = Math.floor((Date.now() - timestamp) / 1000);
         
-        if (seconds < 60) return 'الآن';
-        if (seconds < 3600) return `منذ ${Math.floor(seconds / 60)} دقيقة`;
-        if (seconds < 86400) return `منذ ${Math.floor(seconds / 3600)} ساعة`;
-        return `منذ ${Math.floor(seconds / 86400)} يوم`;
+        if (seconds < 60) return 'Ahora';
+        if (seconds < 3600) return `Hace ${Math.floor(seconds / 60)} minutos`;
+        if (seconds < 86400) return `Hace ${Math.floor(seconds / 3600)} horas`;
+        return `Hace ${Math.floor(seconds / 86400)} días`;
     }
     
     // ============================================

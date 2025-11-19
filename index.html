@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" dir="rtl">
+<html lang="es" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,11 +20,11 @@
             <div class="header-stats">
                 <div class="stat-item">
                     <span class="stat-value" id="totalLearned">0</span>
-                    <span class="stat-label">كلمات متعلمة</span>
+                    <span class="stat-label">Palabras Aprendidas</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-value" id="streakDays">0</span>
-                    <span class="stat-label">أيام متتالية</span>
+                    <span class="stat-label">Días Seguidos</span>
                 </div>
             </div>
         </header>
@@ -35,7 +35,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 </svg>
-                الرئيسية
+                Inicio
             </button>
             <button class="nav-btn" data-view="categories">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -44,14 +44,14 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                الفئات
+                Categorías
             </button>
             <button class="nav-btn" data-view="practice">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                 </svg>
-                المراجعة
+                Práctica
             </button>
             <button class="nav-btn" data-view="progress">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -59,7 +59,7 @@
                     <line x1="12" y1="20" x2="12" y2="4"></line>
                     <line x1="6" y1="20" x2="6" y2="14"></line>
                 </svg>
-                الإحصائيات
+                Estadísticas
             </button>
         </nav>
 
@@ -68,35 +68,35 @@
             <!-- Home View -->
             <div class="view active" id="homeView">
                 <div class="welcome-section">
-                    <h2>مرحباً بك في تطبيق حفظ الكلمات الإنجليزية</h2>
-                    <p>تعلم وحفظ كلمات المستوى A1 & A2 باستخدام تقنيات علمية مثبتة</p>
+                    <h2>Bienvenido a la Aplicación de Vocabulario Inglés</h2>
+                    <p>Aprende y memoriza palabras de nivel A1 & A2 usando técnicas científicas comprobadas</p>
                 </div>
 
                 <div class="quick-actions">
                     <div class="action-card primary" data-action="daily-review">
                         <div class="card-icon">🎯</div>
-                        <h3>المراجعة اليومية</h3>
-                        <p class="card-count" id="dueCards">0 كلمة للمراجعة</p>
-                        <button class="btn btn-primary">ابدأ المراجعة</button>
+                        <h3>Revisión Diaria</h3>
+                        <p class="card-count" id="dueCards">0 palabras para revisar</p>
+                        <button class="btn btn-primary">Comenzar Revisión</button>
                     </div>
 
                     <div class="action-card secondary" data-action="new-words">
                         <div class="card-icon">✨</div>
-                        <h3>كلمات جديدة</h3>
-                        <p class="card-count" id="newWordsCount">0 كلمة جديدة</p>
-                        <button class="btn btn-secondary">تعلم الآن</button>
+                        <h3>Palabras Nuevas</h3>
+                        <p class="card-count" id="newWordsCount">0 palabras nuevas</p>
+                        <button class="btn btn-secondary">Aprender Ahora</button>
                     </div>
 
                     <div class="action-card tertiary" data-action="browse-categories">
                         <div class="card-icon">📚</div>
-                        <h3>تصفح الفئات</h3>
-                        <p class="card-count">11 فئة متاحة</p>
-                        <button class="btn btn-tertiary">استكشف</button>
+                        <h3>Explorar Categorías</h3>
+                        <p class="card-count">11 categorías disponibles</p>
+                        <button class="btn btn-tertiary">Explorar</button>
                     </div>
                 </div>
 
                 <div class="progress-overview">
-                    <h3>نظرة عامة على تقدمك</h3>
+                    <h3>Resumen de tu Progreso</h3>
                     <div class="progress-grid">
                         <div class="progress-item">
                             <div class="progress-circle" data-progress="0">
@@ -106,19 +106,19 @@
                                 </svg>
                                 <span class="progress-text">0%</span>
                             </div>
-                            <p>إجمالي التقدم</p>
+                            <p>Progreso Total</p>
                         </div>
                         <div class="progress-stats">
                             <div class="stat-row">
-                                <span>جديدة</span>
+                                <span>Nuevas</span>
                                 <span class="stat-badge new" id="statsNew">0</span>
                             </div>
                             <div class="stat-row">
-                                <span>قيد التعلم</span>
+                                <span>Aprendiendo</span>
                                 <span class="stat-badge learning" id="statsLearning">0</span>
                             </div>
                             <div class="stat-row">
-                                <span>متقنة</span>
+                                <span>Dominadas</span>
                                 <span class="stat-badge mastered" id="statsMastered">0</span>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
 
             <!-- Categories View -->
             <div class="view" id="categoriesView">
-                <h2>الفئات</h2>
+                <h2>Categorías</h2>
                 <div class="categories-grid" id="categoriesGrid">
                     <!-- Categories will be dynamically inserted -->
                 </div>
@@ -139,27 +139,27 @@
                 <div class="practice-container">
                     <!-- Study Mode Selection -->
                     <div class="mode-selection" id="modeSelection">
-                        <h2>اختر طريقة الدراسة</h2>
+                        <h2>Elige tu Método de Estudio</h2>
                         <div class="modes-grid">
                             <div class="mode-card" data-mode="flashcard">
                                 <div class="mode-icon">🎴</div>
-                                <h3>بطاقات تعليمية</h3>
-                                <p>اقلب البطاقة لرؤية الترجمة</p>
+                                <h3>Tarjetas de Memoria</h3>
+                                <p>Voltea la tarjeta para ver la traducción</p>
                             </div>
                             <div class="mode-card" data-mode="quiz">
                                 <div class="mode-icon">❓</div>
-                                <h3>اختبار متعدد الخيارات</h3>
-                                <p>اختر الترجمة الصحيحة</p>
+                                <h3>Quiz de Opción Múltiple</h3>
+                                <p>Selecciona la traducción correcta</p>
                             </div>
                             <div class="mode-card" data-mode="typing">
                                 <div class="mode-icon">⌨️</div>
-                                <h3>الكتابة</h3>
-                                <p>اكتب الكلمة الصحيحة</p>
+                                <h3>Escritura</h3>
+                                <p>Escribe la palabra correcta</p>
                             </div>
                             <div class="mode-card" data-mode="listening">
                                 <div class="mode-icon">🔊</div>
-                                <h3>الاستماع</h3>
-                                <p>استمع واكتب الكلمة</p>
+                                <h3>Escucha</h3>
+                                <p>Escucha y escribe la palabra</p>
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                     <!-- Flashcard Mode -->
                     <div class="study-mode hidden" id="flashcardMode">
                         <div class="study-header">
-                            <button class="btn-back">← رجوع</button>
+                            <button class="btn-back">← Volver</button>
                             <div class="study-progress">
                                 <span id="currentCard">1</span> / <span id="totalCards">10</span>
                             </div>
@@ -178,7 +178,7 @@
                             <div class="flashcard" id="flashcard">
                                 <div class="flashcard-front">
                                     <div class="card-word" id="cardWord">Word</div>
-                                    <p class="flip-hint">انقر للقلب</p>
+                                    <p class="flip-hint">Haz clic para voltear</p>
                                 </div>
                                 <div class="flashcard-back">
                                     <div class="card-translation" id="cardTranslation">Translation</div>
@@ -190,23 +190,23 @@
                         <div class="difficulty-buttons">
                             <button class="diff-btn hard" data-difficulty="1">
                                 <span class="diff-emoji">😰</span>
-                                <span>صعبة</span>
-                                <small>مراجعة قريبة</small>
+                                <span>Difícil</span>
+                                <small>Revisar pronto</small>
                             </button>
                             <button class="diff-btn medium" data-difficulty="2">
                                 <span class="diff-emoji">🤔</span>
-                                <span>متوسطة</span>
-                                <small>مراجعة غداً</small>
+                                <span>Regular</span>
+                                <small>Revisar mañana</small>
                             </button>
                             <button class="diff-btn easy" data-difficulty="3">
                                 <span class="diff-emoji">😊</span>
-                                <span>سهلة</span>
-                                <small>مراجعة بعد أيام</small>
+                                <span>Fácil</span>
+                                <small>Revisar en unos días</small>
                             </button>
                             <button class="diff-btn perfect" data-difficulty="4">
                                 <span class="diff-emoji">🎉</span>
-                                <span>متقنة</span>
-                                <small>مراجعة بعد أسبوع</small>
+                                <span>Perfecto</span>
+                                <small>Revisar en una semana</small>
                             </button>
                         </div>
                     </div>
@@ -214,16 +214,16 @@
                     <!-- Quiz Mode -->
                     <div class="study-mode hidden" id="quizMode">
                         <div class="study-header">
-                            <button class="btn-back">← رجوع</button>
+                            <button class="btn-back">← Volver</button>
                             <div class="study-progress">
                                 <span id="quizCurrentCard">1</span> / <span id="quizTotalCards">10</span>
                             </div>
-                            <div class="quiz-score">النتيجة: <span id="quizScore">0</span></div>
+                            <div class="quiz-score">Puntuación: <span id="quizScore">0</span></div>
                         </div>
 
                         <div class="quiz-container">
                             <div class="quiz-question">
-                                <h3>ما هي ترجمة هذه الكلمة؟</h3>
+                                <h3>¿Cuál es la traducción de esta palabra?</h3>
                                 <div class="quiz-word" id="quizWord">Word</div>
                             </div>
 
@@ -233,7 +233,7 @@
 
                             <div class="quiz-feedback hidden" id="quizFeedback">
                                 <div class="feedback-content"></div>
-                                <button class="btn btn-primary" id="nextQuizBtn">التالي</button>
+                                <button class="btn btn-primary" id="nextQuizBtn">Siguiente</button>
                             </div>
                         </div>
                     </div>
@@ -241,27 +241,27 @@
                     <!-- Typing Mode -->
                     <div class="study-mode hidden" id="typingMode">
                         <div class="study-header">
-                            <button class="btn-back">← رجوع</button>
+                            <button class="btn-back">← Volver</button>
                             <div class="study-progress">
                                 <span id="typingCurrentCard">1</span> / <span id="typingTotalCards">10</span>
                             </div>
-                            <div class="typing-score">الصحيحة: <span id="typingScore">0</span></div>
+                            <div class="typing-score">Correctas: <span id="typingScore">0</span></div>
                         </div>
 
                         <div class="typing-container">
                             <div class="typing-prompt">
-                                <h3>اكتب الكلمة الإنجليزية لـ:</h3>
+                                <h3>Escribe la palabra en inglés para:</h3>
                                 <div class="typing-translation" id="typingTranslation">Translation</div>
                             </div>
 
                             <div class="typing-input-wrapper">
-                                <input type="text" id="typingInput" class="typing-input" placeholder="اكتب هنا..." autocomplete="off" dir="ltr">
-                                <button class="btn btn-primary" id="checkTypingBtn">تحقق</button>
+                                <input type="text" id="typingInput" class="typing-input" placeholder="Escribe aquí..." autocomplete="off" dir="ltr">
+                                <button class="btn btn-primary" id="checkTypingBtn">Verificar</button>
                             </div>
 
                             <div class="typing-feedback hidden" id="typingFeedback">
                                 <div class="feedback-content"></div>
-                                <button class="btn btn-primary" id="nextTypingBtn">التالي</button>
+                                <button class="btn btn-primary" id="nextTypingBtn">Siguiente</button>
                             </div>
                         </div>
                     </div>
@@ -269,35 +269,35 @@
                     <!-- Listening Mode -->
                     <div class="study-mode hidden" id="listeningMode">
                         <div class="study-header">
-                            <button class="btn-back">← رجوع</button>
+                            <button class="btn-back">← Volver</button>
                             <div class="study-progress">
                                 <span id="listeningCurrentCard">1</span> / <span id="listeningTotalCards">10</span>
                             </div>
-                            <div class="listening-score">الصحيحة: <span id="listeningScore">0</span></div>
+                            <div class="listening-score">Correctas: <span id="listeningScore">0</span></div>
                         </div>
 
                         <div class="listening-container">
                             <div class="listening-prompt">
-                                <h3>استمع إلى الكلمة واكتبها:</h3>
+                                <h3>Escucha la palabra y escríbela:</h3>
                                 <button class="listen-btn" id="listenBtn">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                                         <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                                     </svg>
-                                    <span>🔊 استمع</span>
+                                    <span>🔊 Escuchar</span>
                                 </button>
-                                <p class="listen-hint">يمكنك الاستماع عدة مرات</p>
+                                <p class="listen-hint">Puedes escuchar varias veces</p>
                             </div>
 
                             <div class="typing-input-wrapper">
-                                <input type="text" id="listeningInput" class="typing-input" placeholder="اكتب ما سمعته..." autocomplete="off" dir="ltr">
-                                <button class="btn btn-primary" id="checkListeningBtn">تحقق</button>
+                                <input type="text" id="listeningInput" class="typing-input" placeholder="Escribe lo que escuchaste..." autocomplete="off" dir="ltr">
+                                <button class="btn btn-primary" id="checkListeningBtn">Verificar</button>
                             </div>
 
                             <div class="typing-feedback hidden" id="listeningFeedback">
                                 <div class="feedback-content"></div>
                                 <div class="correct-word" id="listeningCorrectWord"></div>
-                                <button class="btn btn-primary" id="nextListeningBtn">التالي</button>
+                                <button class="btn btn-primary" id="nextListeningBtn">Siguiente</button>
                             </div>
                         </div>
                     </div>
@@ -306,24 +306,24 @@
                     <div class="study-mode hidden" id="sessionComplete">
                         <div class="complete-container">
                             <div class="complete-icon">🎊</div>
-                            <h2>أحسنت! لقد أنهيت الجلسة</h2>
+                            <h2>¡Excelente! Has completado la sesión</h2>
                             <div class="session-stats">
                                 <div class="session-stat">
                                     <span class="stat-value" id="sessionWords">0</span>
-                                    <span class="stat-label">كلمة</span>
+                                    <span class="stat-label">Palabras</span>
                                 </div>
                                 <div class="session-stat">
                                     <span class="stat-value" id="sessionTime">0:00</span>
-                                    <span class="stat-label">الوقت</span>
+                                    <span class="stat-label">Tiempo</span>
                                 </div>
                                 <div class="session-stat">
                                     <span class="stat-value" id="sessionAccuracy">0%</span>
-                                    <span class="stat-label">الدقة</span>
+                                    <span class="stat-label">Precisión</span>
                                 </div>
                             </div>
                             <div class="complete-actions">
-                                <button class="btn btn-primary" id="studyAgainBtn">ادرس مرة أخرى</button>
-                                <button class="btn btn-secondary" id="backHomeBtn">العودة للرئيسية</button>
+                                <button class="btn btn-primary" id="studyAgainBtn">Estudiar de Nuevo</button>
+                                <button class="btn btn-secondary" id="backHomeBtn">Volver al Inicio</button>
                             </div>
                         </div>
                     </div>
@@ -332,50 +332,50 @@
 
             <!-- Progress View -->
             <div class="view" id="progressView">
-                <h2>إحصائيات التقدم</h2>
+                <h2>Estadísticas de Progreso</h2>
                 
                 <div class="stats-overview">
                     <div class="stat-card">
                         <div class="stat-icon">📖</div>
                         <div class="stat-info">
                             <span class="stat-number" id="totalWordsStudied">0</span>
-                            <span class="stat-title">كلمة مدروسة</span>
+                            <span class="stat-title">Palabras Estudiadas</span>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">🔥</div>
                         <div class="stat-info">
                             <span class="stat-number" id="currentStreak">0</span>
-                            <span class="stat-title">أيام متتالية</span>
+                            <span class="stat-title">Días Seguidos</span>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">⏱️</div>
                         <div class="stat-info">
                             <span class="stat-number" id="totalTimeStudied">0</span>
-                            <span class="stat-title">دقيقة دراسة</span>
+                            <span class="stat-title">Minutos de Estudio</span>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">✅</div>
                         <div class="stat-info">
                             <span class="stat-number" id="accuracyRate">0%</span>
-                            <span class="stat-title">معدل الدقة</span>
+                            <span class="stat-title">Tasa de Precisión</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="category-progress">
-                    <h3>التقدم حسب الفئة</h3>
+                    <h3>Progreso por Categoría</h3>
                     <div class="category-progress-list" id="categoryProgressList">
                         <!-- Category progress will be dynamically inserted -->
                     </div>
                 </div>
 
                 <div class="recent-activity">
-                    <h3>النشاط الأخير</h3>
+                    <h3>Actividad Reciente</h3>
                     <div class="activity-list" id="activityList">
-                        <p class="no-activity">لم تبدأ الدراسة بعد. ابدأ الآن!</p>
+                        <p class="no-activity">Aún no has comenzado a estudiar. ¡Empieza ahora!</p>
                     </div>
                 </div>
             </div>
