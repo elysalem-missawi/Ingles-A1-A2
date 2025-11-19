@@ -152,7 +152,15 @@ class MemoryApp {
     }
     
     getWordsByCategory(category) {
-        return Object.values(this.progress.words).filter(word => word.category === category);
+        try {
+            const words = Object.values(this.progress.words).filter(word => {
+                return word && word.category && word.category.trim() === category.trim();
+            });
+            return words;
+        } catch (error) {
+            console.error('Error al obtener palabras por categoría:', error, category);
+            return [];
+        }
     }
     
     getCategoryProgress(category) {
@@ -406,15 +414,20 @@ class MemoryApp {
         
         grid.innerHTML = '';
         
+        console.log('Renderizando categorías...');
+        
         Object.keys(vocabularyData).forEach(file => {
             Object.keys(vocabularyData[file]).forEach(category => {
-                const progress = this.getCategoryProgress(category);
-                const icon = categoryIcons[category] || '📚';
-                const displayName = formatCategoryName(category);
-                
-                const card = document.createElement('div');
-                card.className = 'category-card';
-                card.dataset.category = category;
+                try {
+                    const progress = this.getCategoryProgress(category);
+                    const icon = categoryIcons[category] || '📚';
+                    const displayName = formatCategoryName(category);
+                    
+                    console.log('Categoría:', category, 'Palabras:', progress.total);
+                    
+                    const card = document.createElement('div');
+                    card.className = 'category-card';
+                    card.dataset.category = category;
                 card.innerHTML = `
                     <div class="category-header">
                         <h3>${displayName}</h3>
@@ -431,31 +444,55 @@ class MemoryApp {
                 `;
                 
                 card.addEventListener('click', () => {
-                    this.startCategoryStudy(category);
+                    try {
+                        console.log('Categoría seleccionada:', category);
+                        this.startCategoryStudy(category);
+                    } catch (error) {
+                        console.error('Error al hacer clic en categoría:', error);
+                        alert('Error al abrir la categoría. Por favor, recarga la página.');
+                    }
                 });
                 
                 grid.appendChild(card);
+                } catch (error) {
+                    console.error('Error al renderizar categoría:', category, error);
+                }
             });
         });
     }
     
     startCategoryStudy(category) {
-        this.currentCategory = category;
-        const words = this.getWordsByCategory(category);
-        
-        // Prioritize due words, then new words
-        const dueWords = words.filter(w => w.nextReview <= Date.now());
-        const newWords = words.filter(w => w.level === 0 && w.correctCount === 0).slice(0, 5);
-        
-        this.sessionCards = [...dueWords, ...newWords].slice(0, 20);
-        
-        if (this.sessionCards.length === 0) {
-            alert('¡No hay palabras nuevas en esta categoría!');
-            return;
+        try {
+            this.currentCategory = category;
+            const words = this.getWordsByCategory(category);
+            
+            if (!words || words.length === 0) {
+                alert('No se encontraron palabras en esta categoría.');
+                return;
+            }
+            
+            // Prioritize due words, then new words
+            const dueWords = words.filter(w => w.nextReview <= Date.now());
+            const newWords = words.filter(w => w.level === 0 && w.correctCount === 0).slice(0, 5);
+            
+            this.sessionCards = [...dueWords, ...newWords].slice(0, 20);
+            
+            if (this.sessionCards.length === 0) {
+                // Si no hay palabras pendientes, mostrar todas las de la categoría
+                this.sessionCards = words.slice(0, 20);
+            }
+            
+            if (this.sessionCards.length === 0) {
+                alert('¡No hay palabras en esta categoría!');
+                return;
+            }
+            
+            this.shuffleArray(this.sessionCards);
+            this.switchView('practice');
+        } catch (error) {
+            console.error('Error al iniciar estudio de categoría:', error);
+            alert('Error al cargar la categoría. Por favor, intenta de nuevo.');
         }
-        
-        this.shuffleArray(this.sessionCards);
-        this.switchView('practice');
     }
     
     // ============================================
@@ -761,23 +798,72 @@ class MemoryApp {
             // Cancel any ongoing speech
             window.speechSynthesis.cancel();
             
-            const utterance = new SpeechSynthesisUtterance(card.word);
-            utterance.lang = 'en-US';
-            utterance.rate = 0.8; // Slower for learning
-            utterance.pitch = 1;
-            utterance.volume = 1;
-            
-            // Add visual feedback
-            const btn = document.getElementById('listenBtn');
-            btn.style.transform = 'scale(0.95)';
-            
-            utterance.onend = () => {
-                btn.style.transform = 'scale(1)';
+            // Wait for voices to load
+            const speak = () => {
+                const utterance = new SpeechSynthesisUtterance(card.word);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8; // Slower for learning
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                
+                // Try to select an English voice
+                const voices = window.speechSynthesis.getVoices();
+                const englishVoice = voices.find(voice => 
+                    voice.lang.startsWith('en') || 
+                    voice.lang.startsWith('en-US') ||
+                    voice.lang.startsWith('en-GB')
+                );
+                if (englishVoice) {
+                    utterance.voice = englishVoice;
+                }
+                
+                // Add visual feedback
+                const btn = document.getElementById('listenBtn');
+                if (btn) {
+                    btn.style.transform = 'scale(0.95)';
+                    btn.disabled = true;
+                }
+                
+                utterance.onend = () => {
+                    if (btn) {
+                        btn.style.transform = 'scale(1)';
+                        btn.disabled = false;
+                    }
+                };
+                
+                utterance.onerror = (event) => {
+                    console.error('Error en la síntesis de voz:', event);
+                    if (btn) {
+                        btn.style.transform = 'scale(1)';
+                        btn.disabled = false;
+                    }
+                    // Mostrar la palabra en texto como alternativa
+                    alert('No se puede reproducir el audio. La palabra es: ' + card.word);
+                };
+                
+                try {
+                    window.speechSynthesis.speak(utterance);
+                } catch (error) {
+                    console.error('Error al reproducir:', error);
+                    alert('Error al reproducir el audio. La palabra es: ' + card.word);
+                }
             };
             
-            window.speechSynthesis.speak(utterance);
+            // Check if voices are loaded
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                speak();
+            } else {
+                // Wait for voices to load
+                window.speechSynthesis.onvoiceschanged = () => {
+                    speak();
+                };
+                // Fallback timeout
+                setTimeout(speak, 100);
+            }
         } else {
-            alert('El navegador no soporta pronunciación de voz. Prueba con Chrome o Edge.');
+            // Fallback: mostrar la palabra
+            alert('Audio no disponible. La palabra es: ' + card.word);
         }
     }
     
