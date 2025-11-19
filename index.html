@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Memory - A1/A2 Learning App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <h1>English Memory</h1>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="totalLearned">0</span>
+                    <span class="stat-label">كلمات متعلمة</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="streakDays">0</span>
+                    <span class="stat-label">أيام متتالية</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <button class="nav-btn active" data-view="home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                </svg>
+                الرئيسية
+            </button>
+            <button class="nav-btn" data-view="categories">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                الفئات
+            </button>
+            <button class="nav-btn" data-view="practice">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                المراجعة
+            </button>
+            <button class="nav-btn" data-view="progress">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                الإحصائيات
+            </button>
+        </nav>
+
+        <!-- Views Container -->
+        <main class="main-content">
+            <!-- Home View -->
+            <div class="view active" id="homeView">
+                <div class="welcome-section">
+                    <h2>مرحباً بك في تطبيق حفظ الكلمات الإنجليزية</h2>
+                    <p>تعلم وحفظ كلمات المستوى A1 & A2 باستخدام تقنيات علمية مثبتة</p>
+                </div>
+
+                <div class="quick-actions">
+                    <div class="action-card primary" data-action="daily-review">
+                        <div class="card-icon">🎯</div>
+                        <h3>المراجعة اليومية</h3>
+                        <p class="card-count" id="dueCards">0 كلمة للمراجعة</p>
+                        <button class="btn btn-primary">ابدأ المراجعة</button>
+                    </div>
+
+                    <div class="action-card secondary" data-action="new-words">
+                        <div class="card-icon">✨</div>
+                        <h3>كلمات جديدة</h3>
+                        <p class="card-count" id="newWordsCount">0 كلمة جديدة</p>
+                        <button class="btn btn-secondary">تعلم الآن</button>
+                    </div>
+
+                    <div class="action-card tertiary" data-action="browse-categories">
+                        <div class="card-icon">📚</div>
+                        <h3>تصفح الفئات</h3>
+                        <p class="card-count">11 فئة متاحة</p>
+                        <button class="btn btn-tertiary">استكشف</button>
+                    </div>
+                </div>
+
+                <div class="progress-overview">
+                    <h3>نظرة عامة على تقدمك</h3>
+                    <div class="progress-grid">
+                        <div class="progress-item">
+                            <div class="progress-circle" data-progress="0">
+                                <svg viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45"></circle>
+                                    <circle cx="50" cy="50" r="45" class="progress-bar"></circle>
+                                </svg>
+                                <span class="progress-text">0%</span>
+                            </div>
+                            <p>إجمالي التقدم</p>
+                        </div>
+                        <div class="progress-stats">
+                            <div class="stat-row">
+                                <span>جديدة</span>
+                                <span class="stat-badge new" id="statsNew">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>قيد التعلم</span>
+                                <span class="stat-badge learning" id="statsLearning">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>متقنة</span>
+                                <span class="stat-badge mastered" id="statsMastered">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories View -->
+            <div class="view" id="categoriesView">
+                <h2>الفئات</h2>
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Categories will be dynamically inserted -->
+                </div>
+            </div>
+
+            <!-- Practice View -->
+            <div class="view" id="practiceView">
+                <div class="practice-container">
+                    <!-- Study Mode Selection -->
+                    <div class="mode-selection" id="modeSelection">
+                        <h2>اختر طريقة الدراسة</h2>
+                        <div class="modes-grid">
+                            <div class="mode-card" data-mode="flashcard">
+                                <div class="mode-icon">🎴</div>
+                                <h3>بطاقات تعليمية</h3>
+                                <p>اقلب البطاقة لرؤية الترجمة</p>
+                            </div>
+                            <div class="mode-card" data-mode="quiz">
+                                <div class="mode-icon">❓</div>
+                                <h3>اختبار متعدد الخيارات</h3>
+                                <p>اختر الترجمة الصحيحة</p>
+                            </div>
+                            <div class="mode-card" data-mode="typing">
+                                <div class="mode-icon">⌨️</div>
+                                <h3>الكتابة</h3>
+                                <p>اكتب الكلمة الصحيحة</p>
+                            </div>
+                            <div class="mode-card" data-mode="listening">
+                                <div class="mode-icon">🔊</div>
+                                <h3>الاستماع</h3>
+                                <p>استمع واكتب الكلمة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard Mode -->
+                    <div class="study-mode hidden" id="flashcardMode">
+                        <div class="study-header">
+                            <button class="btn-back">← رجوع</button>
+                            <div class="study-progress">
+                                <span id="currentCard">1</span> / <span id="totalCards">10</span>
+                            </div>
+                            <div class="timer" id="sessionTimer">00:00</div>
+                        </div>
+
+                        <div class="flashcard-wrapper">
+                            <div class="flashcard" id="flashcard">
+                                <div class="flashcard-front">
+                                    <div class="card-word" id="cardWord">Word</div>
+                                    <p class="flip-hint">انقر للقلب</p>
+                                </div>
+                                <div class="flashcard-back">
+                                    <div class="card-translation" id="cardTranslation">Translation</div>
+                                    <div class="card-category" id="cardCategory">Category</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="difficulty-buttons">
+                            <button class="diff-btn hard" data-difficulty="1">
+                                <span class="diff-emoji">😰</span>
+                                <span>صعبة</span>
+                                <small>مراجعة قريبة</small>
+                            </button>
+                            <button class="diff-btn medium" data-difficulty="2">
+                                <span class="diff-emoji">🤔</span>
+                                <span>متوسطة</span>
+                                <small>مراجعة غداً</small>
+                            </button>
+                            <button class="diff-btn easy" data-difficulty="3">
+                                <span class="diff-emoji">😊</span>
+                                <span>سهلة</span>
+                                <small>مراجعة بعد أيام</small>
+                            </button>
+                            <button class="diff-btn perfect" data-difficulty="4">
+                                <span class="diff-emoji">🎉</span>
+                                <span>متقنة</span>
+                                <small>مراجعة بعد أسبوع</small>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Mode -->
+                    <div class="study-mode hidden" id="quizMode">
+                        <div class="study-header">
+                            <button class="btn-back">← رجوع</button>
+                            <div class="study-progress">
+                                <span id="quizCurrentCard">1</span> / <span id="quizTotalCards">10</span>
+                            </div>
+                            <div class="quiz-score">النتيجة: <span id="quizScore">0</span></div>
+                        </div>
+
+                        <div class="quiz-container">
+                            <div class="quiz-question">
+                                <h3>ما هي ترجمة هذه الكلمة؟</h3>
+                                <div class="quiz-word" id="quizWord">Word</div>
+                            </div>
+
+                            <div class="quiz-options" id="quizOptions">
+                                <!-- Options will be dynamically inserted -->
+                            </div>
+
+                            <div class="quiz-feedback hidden" id="quizFeedback">
+                                <div class="feedback-content"></div>
+                                <button class="btn btn-primary" id="nextQuizBtn">التالي</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Typing Mode -->
+                    <div class="study-mode hidden" id="typingMode">
+                        <div class="study-header">
+                            <button class="btn-back">← رجوع</button>
+                            <div class="study-progress">
+                                <span id="typingCurrentCard">1</span> / <span id="typingTotalCards">10</span>
+                            </div>
+                            <div class="typing-score">الصحيحة: <span id="typingScore">0</span></div>
+                        </div>
+
+                        <div class="typing-container">
+                            <div class="typing-prompt">
+                                <h3>اكتب الكلمة الإنجليزية لـ:</h3>
+                                <div class="typing-translation" id="typingTranslation">Translation</div>
+                            </div>
+
+                            <div class="typing-input-wrapper">
+                                <input type="text" id="typingInput" class="typing-input" placeholder="اكتب هنا..." autocomplete="off" dir="ltr">
+                                <button class="btn btn-primary" id="checkTypingBtn">تحقق</button>
+                            </div>
+
+                            <div class="typing-feedback hidden" id="typingFeedback">
+                                <div class="feedback-content"></div>
+                                <button class="btn btn-primary" id="nextTypingBtn">التالي</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Listening Mode -->
+                    <div class="study-mode hidden" id="listeningMode">
+                        <div class="study-header">
+                            <button class="btn-back">← رجوع</button>
+                            <div class="study-progress">
+                                <span id="listeningCurrentCard">1</span> / <span id="listeningTotalCards">10</span>
+                            </div>
+                            <div class="listening-score">الصحيحة: <span id="listeningScore">0</span></div>
+                        </div>
+
+                        <div class="listening-container">
+                            <div class="listening-prompt">
+                                <h3>استمع إلى الكلمة واكتبها:</h3>
+                                <button class="listen-btn" id="listenBtn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                                    </svg>
+                                    <span>🔊 استمع</span>
+                                </button>
+                                <p class="listen-hint">يمكنك الاستماع عدة مرات</p>
+                            </div>
+
+                            <div class="typing-input-wrapper">
+                                <input type="text" id="listeningInput" class="typing-input" placeholder="اكتب ما سمعته..." autocomplete="off" dir="ltr">
+                                <button class="btn btn-primary" id="checkListeningBtn">تحقق</button>
+                            </div>
+
+                            <div class="typing-feedback hidden" id="listeningFeedback">
+                                <div class="feedback-content"></div>
+                                <div class="correct-word" id="listeningCorrectWord"></div>
+                                <button class="btn btn-primary" id="nextListeningBtn">التالي</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Session Complete -->
+                    <div class="study-mode hidden" id="sessionComplete">
+                        <div class="complete-container">
+                            <div class="complete-icon">🎊</div>
+                            <h2>أحسنت! لقد أنهيت الجلسة</h2>
+                            <div class="session-stats">
+                                <div class="session-stat">
+                                    <span class="stat-value" id="sessionWords">0</span>
+                                    <span class="stat-label">كلمة</span>
+                                </div>
+                                <div class="session-stat">
+                                    <span class="stat-value" id="sessionTime">0:00</span>
+                                    <span class="stat-label">الوقت</span>
+                                </div>
+                                <div class="session-stat">
+                                    <span class="stat-value" id="sessionAccuracy">0%</span>
+                                    <span class="stat-label">الدقة</span>
+                                </div>
+                            </div>
+                            <div class="complete-actions">
+                                <button class="btn btn-primary" id="studyAgainBtn">ادرس مرة أخرى</button>
+                                <button class="btn btn-secondary" id="backHomeBtn">العودة للرئيسية</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress View -->
+            <div class="view" id="progressView">
+                <h2>إحصائيات التقدم</h2>
+                
+                <div class="stats-overview">
+                    <div class="stat-card">
+                        <div class="stat-icon">📖</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalWordsStudied">0</span>
+                            <span class="stat-title">كلمة مدروسة</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="currentStreak">0</span>
+                            <span class="stat-title">أيام متتالية</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalTimeStudied">0</span>
+                            <span class="stat-title">دقيقة دراسة</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="accuracyRate">0%</span>
+                            <span class="stat-title">معدل الدقة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-progress">
+                    <h3>التقدم حسب الفئة</h3>
+                    <div class="category-progress-list" id="categoryProgressList">
+                        <!-- Category progress will be dynamically inserted -->
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>النشاط الأخير</h3>
+                    <div class="activity-list" id="activityList">
+                        <p class="no-activity">لم تبدأ الدراسة بعد. ابدأ الآن!</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
